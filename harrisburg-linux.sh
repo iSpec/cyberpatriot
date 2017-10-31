@@ -7,19 +7,19 @@ function main {
     echo "running main ($now)"
     echo "run as 'sudo sh harrisburg-linux.sh 2>&1 | tee output.log' to output the console output to a log file."
     #manual config edits
-    nano /etc/apt/sources.list #check for malicious sources
-    nano /etc/resolv.conf #make sure if safe, use 8.8.8.8 for name server
-    nano /etc/hosts #make sure is not redirecting
-    nano /etc/rc.local #should be empty except for 'exit 0'
-    nano /etc/sysctl.conf #change net.ipv4.tcp_syncookies entry from 0 to 1
-    nano /etc/lightdm/lightdm.conf #allow_guest=false, remove autologin
-    nano /etc/ssh/sshd_config #Look for PermitRootLogin and set to no
+    sudo nano /etc/apt/sources.list #check for malicious sources
+    sudo nano /etc/resolv.conf #make sure if safe, use 8.8.8.8 for name server
+    sudo nano /etc/hosts #make sure is not redirecting
+    sudo nano /etc/rc.local #should be empty except for 'exit 0'
+    sudo nano /etc/sysctl.conf #change net.ipv4.tcp_syncookies entry from 0 to 1
+    sudo nano /etc/lightdm/lightdm.conf #allow_guest=false, remove autologin
+    sudo nano /etc/ssh/sshd_config #Look for PermitRootLogin and set to no
     #installs
-    apt-get -V -y install firefox hardinfo chkrootkit iptables portsentry lynis ufw gufw sysv-rc-conf nessus clamav
-    apt-get -V -y install --reinstall coreutils
-    apt-get update
-    apt-get upgrade
-    apt-get dist-upgrade
+    sudo apt-get -V -y install firefox hardinfo chkrootkit iptables portsentry lynis ufw gufw sysv-rc-conf nessus clamav
+    sudo apt-get -V -y install --reinstall coreutils
+    sudo apt-get update
+    sudo apt-get upgrade
+    sudo apt-get dist-upgrade
     #network security
     iptables -A INPUT -p tcp -s 0/0 -d 0/0 --dport 23 -j DROP         #Block Telnet
     iptables -A INPUT -p tcp -s 0/0 -d 0/0 --dport 2049 -j DROP       #Block NFS
